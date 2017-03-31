@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.sample.resources.Views;
 
-@JsonIgnoreProperties({"address"})
+@JsonIgnoreProperties({"address", "policyId"})
 public class DomainObject {
 
   @JsonView(Views.PublicView.class)
@@ -47,6 +47,10 @@ public class DomainObject {
 
   public void setSubObject(SubObject subObject) {
     this.subObject = subObject;
+  }
+
+  public String getPolicyId() {
+    return "dummy policy id";
   }
 
 
