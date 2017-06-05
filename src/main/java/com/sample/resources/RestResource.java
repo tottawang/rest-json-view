@@ -1,7 +1,5 @@
 package com.sample.resources;
 
-import java.util.Optional;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -10,35 +8,28 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.sample.domain.DomainObject;
+import com.sample.service.SampleService;
+
 @Component
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/api")
 public class RestResource {
 
   @Autowired
-  private Optional<ConditionalOnExpressionA> conditionalA;
-
-  @Autowired
-  private Optional<ConditionalOnPropertyB> conditionalB;
+  private SampleService service;
 
   @GET
-  @Path("condition")
-  public String getConditional() {
-    if (conditionalA.isPresent()) {
-      return conditionalA.get().getValue();
-    } else {
-      return "Not Found A";
-    }
+  @Path("get-viewed-object")
+  @JsonView(Views.PublicView.class)
+  public DomainObject getViewedObject() {
+    return service.getValue();
   }
 
   @GET
-  @Path("condition-b")
-  public String getConditionalB() {
-    if (conditionalB.isPresent()) {
-      return conditionalB.get().getValue();
-    } else {
-      return "Not Found B";
-    }
+  @Path("get-object")
+  public DomainObject getObject() {
+    return service.getValue();
   }
-
 }
