@@ -10,10 +10,10 @@
         </rollingPolicy>
 
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>20MB</maxFileSize>
+            <maxFileSize>1MB</maxFileSize>
         </triggeringPolicy>
         <encoder>
-            <pattern>%date %-5level [%X{X-Request-ID}]  [%thread] [%logger{10}.%M] %msg%n
+            <pattern>%date %-5level [%X{X-Request-ID}] [%thread] [%logger{10}.%M] %msg%n
             </pattern>
         </encoder>
     </appender>

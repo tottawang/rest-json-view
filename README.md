@@ -1,4 +1,4 @@
-# springboot-conditional
+# rest-json-view
 
 ### Run and build
 Step-1 : 
@@ -8,4 +8,4 @@ Step-2 :
 java -jar build/libs/sample-0.0.1-SNAPSHOT.jar
 
 Step-3:
-curl http://localhost:{server_port}/api/condition
+curl http://localhost:{server_port}/api/get-viewed-object
