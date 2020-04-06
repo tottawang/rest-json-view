@@ -25,7 +25,7 @@ public class RestResource {
   private SampleService service;
 
   @GET
-  @Path("get-viewed-object")
+  @Path("test")
   @JsonView(Views.PublicView.class)
   public DomainObject getViewedObject() throws InterruptedException {
     System.out.println("test: " + name);
