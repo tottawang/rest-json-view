@@ -19,18 +19,17 @@
     </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%date %-5level [%X{X-Request-ID}] [%thread] [%logger{10}] %msg%n
-            </pattern>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <shortenedLoggerNameLength>10</shortenedLoggerNameLength>
         </encoder>
     </appender>
 
     <logger name="com.sample" additivity="false">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <root level="${LOG_LEVEL:-INFO}">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 
 </configuration>

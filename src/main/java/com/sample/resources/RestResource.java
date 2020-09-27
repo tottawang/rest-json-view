@@ -5,6 +5,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,8 @@ import com.sample.service.SampleService;
 @Path("/api")
 public class RestResource {
 
+  Logger logger = LoggerFactory.getLogger(RestResource.class);
+
   @Value("${IT_OUTCOMES_FOLDER}")
   private String name;
 
@@ -27,7 +31,7 @@ public class RestResource {
   @GET
   @Path("test")
   @JsonView(Views.PublicView.class)
-  public DomainObject getViewedObject() throws InterruptedException {
+  public DomainObject getViewedObject() {
     System.out.println("test: " + name);
     return service.getValue();
   }
@@ -36,5 +40,16 @@ public class RestResource {
   @Path("get-object")
   public DomainObject getObject() {
     return service.getValue();
+  }
+
+  @GET
+  @Path("test-json-log")
+  @JsonView(Views.PublicView.class)
+  public void jsonLog() {
+    try {
+      throw new RuntimeException("test");
+    } catch (Exception ex) {
+      logger.error("test error log", ex);
+    }
   }
 }
